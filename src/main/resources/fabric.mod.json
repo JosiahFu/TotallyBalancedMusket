@@ -18,12 +18,19 @@
 		"main": [
 			"archives.tater.unbalancedmusket.TotallyBalancedMusket"
 		],
+		"client": [
+			"archives.tater.unbalancedmusket.TotallyBalancedMusketClient"
+		],
 		"fabric-datagen": [
 			"archives.tater.unbalancedmusket.TotallyBalancedMusketDataGenerator"
 		]
 	},
 	"mixins": [
-		"unbalancedmusket.mixins.json"
+		"unbalancedmusket.mixins.json",
+		{
+			"config": "unbalancedmusket.client.mixins.json",
+			"environment": "client"
+		}
 	],
 	"depends": {
 		"fabricloader": ">=0.14.24",

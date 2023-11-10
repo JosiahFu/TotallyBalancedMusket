@@ -36,7 +36,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         public static final int LOADED   = 3;
     }
 
-    public MusketItem(Item.Settings settings) {
+    public MusketItem(Settings settings) {
         super(settings);
     }
 
@@ -179,7 +179,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         clearProjectile(musket);
     }
 
-    private static PersistentProjectileEntity createArrow(World world, LivingEntity entity, ItemStack crossbow, ItemStack arrow) {
+    private static PersistentProjectileEntity createArrow(World world, LivingEntity entity, ItemStack musket, ItemStack arrow) {
         ArrowItem arrowItem = (ArrowItem)(arrow.getItem() instanceof ArrowItem ? arrow.getItem() : Items.ARROW);
         PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, arrow, entity);
         if (entity instanceof PlayerEntity) {
@@ -188,7 +188,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
 
         persistentProjectileEntity.setSound(SoundEvents.ITEM_CROSSBOW_HIT);
         persistentProjectileEntity.setShotFromCrossbow(true);
-        int i = EnchantmentHelper.getLevel(Enchantments.PIERCING, crossbow);
+        int i = EnchantmentHelper.getLevel(Enchantments.PIERCING, musket);
         if (i > 0) {
             persistentProjectileEntity.setPierceLevel((byte)i);
         }
@@ -220,7 +220,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
     }
 
     public UseAction getUseAction(ItemStack stack) {
-        return UseAction.BOW;
+        return UseAction.CROSSBOW;
     }
 
     private static float getPullProgress(int useTicks, ItemStack stack) {
