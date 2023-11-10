@@ -4,7 +4,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -45,7 +45,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
 
     @Override
     public Predicate<ItemStack> getProjectiles() {
-        return itemStack -> itemStack.isOf(Items.GUNPOWDER) || itemStack.isOf(Items.STICK) || itemStack.isOf(Items.ARROW);
+        return itemStack -> itemStack.isOf(Items.GUNPOWDER) || itemStack.isOf(Items.STICK) || itemStack.isOf(Items.IRON_NUGGET);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         return (
                 stage == Stage.UNLOADED && item == Items.GUNPOWDER ||
                 stage == Stage.POWDERED && item == Items.STICK ||
-                stage == Stage.RAMMED && item == Items.ARROW
+                stage == Stage.RAMMED && item == Items.IRON_NUGGET
         );
     }
 
@@ -154,11 +154,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
     private static void shoot(World world, LivingEntity shooter, Hand hand, ItemStack musket, ItemStack projectile, float soundPitch, boolean creative, float speed, float divergence) {
         if (world.isClient) return;
 
-        PersistentProjectileEntity projectileEntity = createArrow(world, shooter, musket, projectile);
-
-        if (creative) {
-            projectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
-        }
+        ProjectileEntity projectileEntity = createProjectile(world, shooter, musket, projectile);
 
         Vec3d vec3d = shooter.getOppositeRotationVector(1.0F);
         Quaternionf quaternionf = (new Quaternionf()).setAngleAxis(0, vec3d.x, vec3d.y, vec3d.z);
@@ -179,21 +175,10 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         clearProjectile(musket);
     }
 
-    private static PersistentProjectileEntity createArrow(World world, LivingEntity entity, ItemStack musket, ItemStack arrow) {
-        ArrowItem arrowItem = (ArrowItem)(arrow.getItem() instanceof ArrowItem ? arrow.getItem() : Items.ARROW);
-        PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, arrow, entity);
-        if (entity instanceof PlayerEntity) {
-            persistentProjectileEntity.setCritical(true);
-        }
+    private static ProjectileEntity createProjectile(World world, LivingEntity entity, ItemStack musket, ItemStack projectile) {
+        ProjectileEntity projectileEntity = new MusketBallEntity(world, entity);
 
-        persistentProjectileEntity.setSound(SoundEvents.ITEM_CROSSBOW_HIT);
-        persistentProjectileEntity.setShotFromCrossbow(true);
-        int i = EnchantmentHelper.getLevel(Enchantments.PIERCING, musket);
-        if (i > 0) {
-            persistentProjectileEntity.setPierceLevel((byte)i);
-        }
-
-        return persistentProjectileEntity;
+        return projectileEntity;
     }
 
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
