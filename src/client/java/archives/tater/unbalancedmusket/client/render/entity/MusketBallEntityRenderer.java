@@ -1,6 +1,6 @@
 package archives.tater.unbalancedmusket.client.render.entity;
 
-import archives.tater.unbalancedmusket.MusketBallEntity;
+import archives.tater.unbalancedmusket.entity.MusketBallEntity;
 import archives.tater.unbalancedmusket.TotallyBalancedMusket;
 import archives.tater.unbalancedmusket.TotallyBalancedMusketClient;
 import archives.tater.unbalancedmusket.client.render.entity.model.MusketBallEntityModel;

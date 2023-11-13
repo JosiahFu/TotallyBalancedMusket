@@ -1,5 +1,7 @@
 package archives.tater.unbalancedmusket;
 
+import archives.tater.unbalancedmusket.entity.MusketBallEntity;
+import archives.tater.unbalancedmusket.item.MusketItem;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;

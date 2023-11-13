@@ -1,6 +1,6 @@
 package archives.tater.unbalancedmusket.mixin.client;
 
-import archives.tater.unbalancedmusket.MusketItem;
+import archives.tater.unbalancedmusket.item.MusketItem;
 import archives.tater.unbalancedmusket.TotallyBalancedMusket;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.item.CrossbowItem;

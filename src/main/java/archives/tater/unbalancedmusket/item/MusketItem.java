@@ -1,5 +1,6 @@
-package archives.tater.unbalancedmusket;
+package archives.tater.unbalancedmusket.item;
 
+import archives.tater.unbalancedmusket.entity.MusketBallEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +19,6 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import java.util.function.Predicate;
@@ -40,6 +40,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         super(settings);
     }
 
+    // <0 if no next sound
     private float nextSoundProgressTarget;
 
 
@@ -55,7 +56,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         int stage = getLoadingStage(musket);
 
         if (stage == Stage.LOADED) {
-            shoot(world, user, hand, musket, getProjectile(musket), 1F, user.isCreative(), 10F, 0.2F);
+            shoot(world, user, hand, musket, getProjectile(musket));
             setLoadingStage(musket, 0);
             return TypedActionResult.consume(musket);
         }
@@ -79,7 +80,8 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         if (stage != Stage.RAMMED && progress < 1.0F) return;
 
         boolean result = loadProjectile(user, stack, user.getOffHandStack(), !(user instanceof PlayerEntity player) || player.isCreative());
-        if (!result) return;
+        if (!result || stage != Stage.RAMMED) return;
+
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_CROSSBOW_LOADING_END, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
     }
 
@@ -151,20 +153,19 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         nbtCompound.putInt(LOADING_STAGE_KEY, stage);
     }
 
-    private static void shoot(World world, LivingEntity shooter, Hand hand, ItemStack musket, ItemStack projectile, float soundPitch, boolean creative, float speed, float divergence) {
+    private static void shoot(World world, LivingEntity shooter, Hand hand, ItemStack musket, ItemStack projectile) {
         if (world.isClient) return;
 
-        ProjectileEntity projectileEntity = createProjectile(world, shooter, musket, projectile);
-
-        Vec3d vec3d = shooter.getOppositeRotationVector(1.0F);
-        Quaternionf quaternionf = (new Quaternionf()).setAngleAxis(0, vec3d.x, vec3d.y, vec3d.z);
-        Vec3d vec3d2 = shooter.getRotationVec(1.0F);
-        Vector3f vector3f = vec3d2.toVector3f().rotate(quaternionf);
-        projectileEntity.setVelocity(vector3f.x(), vector3f.y(), vector3f.z(), speed, divergence);
+        ProjectileEntity projectileEntity = new MusketBallEntity(world, shooter);
+        Vec3d shooterVector = shooter.getRotationVec(1.0F);
+        Vector3f velocity = shooterVector.toVector3f();
+        Vec3d position = shooter.getEyePos().add(shooterVector.multiply(0.5F));
+        projectileEntity.setVelocity(velocity.x(), velocity.y(), velocity.z(), (float) 10.0, (float) 0.2);
+        projectileEntity.setPosition(position);
 
         musket.damage(1, shooter, (e) -> e.sendToolBreakStatus(hand));
         world.spawnEntity(projectileEntity);
-        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, soundPitch);
+        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 0.5F, 1.8F);
 
         if (shooter instanceof ServerPlayerEntity serverPlayerEntity) {
 //            Criteria.SHOT_CROSSBOW.trigger(serverPlayerEntity, musket);
@@ -175,23 +176,23 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         clearProjectile(musket);
     }
 
-    private static ProjectileEntity createProjectile(World world, LivingEntity entity, ItemStack musket, ItemStack projectile) {
-        ProjectileEntity projectileEntity = new MusketBallEntity(world, entity);
-
-        return projectileEntity;
-    }
-
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (world.isClient) return;
         int loadingStage = getLoadingStage(stack);
         if (loadingStage == Stage.RAMMED || loadingStage == Stage.LOADED) return;
 
         float progress = (float)(stack.getMaxUseTime() - remainingUseTicks) / (float)getPullTime(stack);
-        if (progress > 1F) return;
-        if (progress <= nextSoundProgressTarget) return;
-        SoundEvent soundEvent = loadingStage == Stage.UNLOADED ? SoundEvents.BLOCK_SAND_PLACE :
-            SoundEvents.BLOCK_SAND_STEP;
+        if (nextSoundProgressTarget < 0 || progress <= nextSoundProgressTarget) return;
+        SoundEvent soundEvent = progress > 1F ?
+                SoundEvents.ITEM_CROSSBOW_LOADING_END : (
+                        loadingStage == Stage.UNLOADED ? SoundEvents.BLOCK_SAND_PLACE :
+                        SoundEvents.BLOCK_SAND_STEP
+                );
         world.playSound(null, user.getX(), user.getY(), user.getZ(), soundEvent, SoundCategory.PLAYERS, 0.5F, 1.0F);
+        if (progress > 1F) {
+            nextSoundProgressTarget = -1;
+            return;
+        }
         nextSoundProgressTarget += SOUND_PROGRESS_STEP;
     }
 

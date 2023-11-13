@@ -22,8 +22,8 @@ public class MusketBallEntityModel<T extends Entity>
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        modelPartData.addChild(MAIN, ModelPartBuilder.create().uv(0, 0).cuboid(-1.0f, -1.0f, -1.0f, 2.0f, 2.0f, 2.0f), ModelTransform.NONE);
-        return TexturedModelData.of(modelData, 8, 4);
+        modelPartData.addChild(MAIN, ModelPartBuilder.create().uv(0, 0).cuboid(-1.5f, -1.5f, -1.5f, 3.0f, 3.0f, 3.0f), ModelTransform.NONE);
+        return TexturedModelData.of(modelData, 12, 6);
     }
 
     @Override

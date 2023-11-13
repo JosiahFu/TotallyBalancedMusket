@@ -1,5 +1,6 @@
-package archives.tater.unbalancedmusket;
+package archives.tater.unbalancedmusket.entity;
 
+import archives.tater.unbalancedmusket.TotallyBalancedMusket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -12,10 +13,13 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 public class MusketBallEntity
         extends ProjectileEntity {
+    private Random random = this.getWorld().getRandom();
+
     public MusketBallEntity(EntityType<? extends MusketBallEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -80,10 +84,13 @@ public class MusketBallEntity
         double vy = packet.getVelocityY();
         double vz = packet.getVelocityZ();
         for (int i = 0; i < 7; ++i) {
-            double g = 0.4 + 0.1 * (double)i;
-            this.getWorld().addParticle(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), vx * g, vy, vz * g);
+            this.getWorld().addParticle(ParticleTypes.CLOUD, this.getX() + rand(0.02F), this.getY() + rand(0.02F), this.getZ() + rand(0.02F), vx * 0.05 + rand(0.05F), (vy * 0.05) + rand(0.05F) + 0.05, vz * 0.05 + rand(0.05F));
         }
         this.setVelocity(vx, vy, vz);
+    }
+
+    private float rand(float size) {
+        return 2 * size * random.nextFloat() - size;
     }
 }
 
