@@ -1,5 +1,6 @@
 package archives.tater.unbalancedmusket.item;
 
+import archives.tater.unbalancedmusket.TotallyBalancedMusket;
 import archives.tater.unbalancedmusket.entity.MusketBallEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -46,7 +47,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
 
     @Override
     public Predicate<ItemStack> getProjectiles() {
-        return itemStack -> itemStack.isOf(Items.GUNPOWDER) || itemStack.isOf(Items.STICK) || itemStack.isOf(Items.IRON_NUGGET);
+        return itemStack -> itemStack.isOf(Items.GUNPOWDER) || itemStack.isOf(TotallyBalancedMusketItems.RAMROD) || itemStack.isOf(Items.IRON_NUGGET);
     }
 
     @Override
@@ -118,7 +119,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
 
         return (
                 stage == Stage.UNLOADED && item == Items.GUNPOWDER ||
-                stage == Stage.POWDERED && item == Items.STICK ||
+                stage == Stage.POWDERED && item == TotallyBalancedMusketItems.RAMROD ||
                 stage == Stage.RAMMED && item == Items.IRON_NUGGET
         );
     }

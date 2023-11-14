@@ -3,12 +3,10 @@
   "package": "archives.tater.unbalancedmusket.mixin.client",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "PlayerEntityRendererMixin"
+    "PlayerEntityRendererMixin",
+    "HeldItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-    "HeldItemRendererMixin"
-  ]
+  }
 }

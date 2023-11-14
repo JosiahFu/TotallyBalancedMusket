@@ -22,7 +22,7 @@
 			"archives.tater.unbalancedmusket.TotallyBalancedMusketClient"
 		],
 		"fabric-datagen": [
-			"archives.tater.unbalancedmusket.TotallyBalancedMusketDataGenerator"
+			"archives.tater.unbalancedmusket.datagen.TotallyBalancedMusketDataGenerator"
 		]
 	},
 	"mixins": [

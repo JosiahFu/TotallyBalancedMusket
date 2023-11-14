@@ -1,6 +1,5 @@
 package archives.tater.unbalancedmusket.entity;
 
-import archives.tater.unbalancedmusket.TotallyBalancedMusket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -33,7 +32,7 @@ public class MusketBallEntity
     }
 
     public MusketBallEntity(World world, double x, double y, double z) {
-        this(TotallyBalancedMusket.MusketBallEntityType, world);
+        this(TotallyBalancedMusketEntities.MusketBallEntityType, world);
         this.setPosition(x, y, z);
     }
 

@@ -1,7 +1,7 @@
 package archives.tater.unbalancedmusket.mixin.client;
 
 import archives.tater.unbalancedmusket.item.MusketItem;
-import archives.tater.unbalancedmusket.TotallyBalancedMusket;
+import archives.tater.unbalancedmusket.item.TotallyBalancedMusketItems;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
@@ -20,7 +20,7 @@ public abstract class PlayerEntityRendererMixin {
 			)
 	)
 	private static boolean allowMusket(ItemStack itemStack, Item item) {
-		return itemStack.isOf(item) || itemStack.isOf(TotallyBalancedMusket.MUSKET);
+		return itemStack.isOf(item) || itemStack.isOf(TotallyBalancedMusketItems.MUSKET);
 	}
 
 	@Redirect(
