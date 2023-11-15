@@ -10,12 +10,12 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class TotallyBalancedMusketEntities {
-    public static final EntityType<MusketBallEntity> MusketBallEntityType = Registry.register(
+    public static final EntityType<IronMusketBallEntity> IRON_MUSKET_BALL = Registry.register(
             Registries.ENTITY_TYPE,
-            new Identifier(TotallyBalancedMusket.MOD_ID, "musket_ball"),
-            FabricEntityTypeBuilder.<MusketBallEntity>create(SpawnGroup.MISC, MusketBallEntity::new)
+            new Identifier(TotallyBalancedMusket.MOD_ID, "iron_musket_ball"),
+            FabricEntityTypeBuilder.<IronMusketBallEntity>create(SpawnGroup.MISC, IronMusketBallEntity::new)
                     .dimensions(EntityDimensions.fixed(0.25F, 0.25F))
-                    .trackRangeBlocks(4).trackedUpdateRate(10)
+                    .trackRangeChunks(4).trackedUpdateRate(10)
                     .build()
     );
 

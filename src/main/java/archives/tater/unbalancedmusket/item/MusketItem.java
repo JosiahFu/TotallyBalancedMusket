@@ -1,6 +1,6 @@
 package archives.tater.unbalancedmusket.item;
 
-import archives.tater.unbalancedmusket.entity.MusketBallEntity;
+import archives.tater.unbalancedmusket.entity.IronMusketBallEntity;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -173,7 +173,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
 
     private static void createProjectile(World world, LivingEntity shooter, ItemStack projectile) {
         // TODO check for gold musket ball
-        final ProjectileEntity projectileEntity = new MusketBallEntity(world, shooter);
+        final ProjectileEntity projectileEntity = new IronMusketBallEntity(world, shooter);
         Vec3d shooterVector = shooter.getRotationVec(1.0F);
         Vector3f velocity = shooterVector.toVector3f();
         Vec3d position = shooter.getEyePos().add(shooterVector.multiply(0.5F));

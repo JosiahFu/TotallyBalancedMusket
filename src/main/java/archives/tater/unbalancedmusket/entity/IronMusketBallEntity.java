@@ -15,15 +15,15 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
-public class MusketBallEntity
+public class IronMusketBallEntity
         extends ProjectileEntity {
     private final Random random = this.getWorld().getRandom();
 
-    public MusketBallEntity(EntityType<? extends MusketBallEntity> entityType, World world) {
+    public IronMusketBallEntity(EntityType<? extends IronMusketBallEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    public MusketBallEntity(World world, LivingEntity owner) {
+    public IronMusketBallEntity(World world, LivingEntity owner) {
         this(world,
                 owner.getX() - (double)(owner.getWidth() + 1.0f) * 0.5 * (double) MathHelper.sin(owner.bodyYaw * ((float)Math.PI / 180)),
                 owner.getEyeY() - (double)0.1f,
@@ -31,8 +31,8 @@ public class MusketBallEntity
         this.setOwner(owner);
     }
 
-    public MusketBallEntity(World world, double x, double y, double z) {
-        this(TotallyBalancedMusketEntities.MusketBallEntityType, world);
+    public IronMusketBallEntity(World world, double x, double y, double z) {
+        this(TotallyBalancedMusketEntities.IRON_MUSKET_BALL, world);
         this.setPosition(x, y, z);
     }
 

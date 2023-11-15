@@ -3,7 +3,7 @@ package archives.tater.unbalancedmusket.client.render.entity;
 import archives.tater.unbalancedmusket.TotallyBalancedMusket;
 import archives.tater.unbalancedmusket.TotallyBalancedMusketClient;
 import archives.tater.unbalancedmusket.client.render.entity.model.MusketBallEntityModel;
-import archives.tater.unbalancedmusket.entity.MusketBallEntity;
+import archives.tater.unbalancedmusket.entity.IronMusketBallEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
@@ -15,18 +15,18 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 @Environment(value= EnvType.CLIENT)
-public class MusketBallEntityRenderer
-        extends EntityRenderer<MusketBallEntity> {
+public class IronMusketBallEntityRenderer
+        extends EntityRenderer<IronMusketBallEntity> {
     private static final Identifier TEXTURE = new Identifier(TotallyBalancedMusket.MOD_ID, "textures/entity/projectile/iron_musket_ball.png");
-    private final MusketBallEntityModel<MusketBallEntity> model;
+    private final MusketBallEntityModel<IronMusketBallEntity> model;
 
-    public MusketBallEntityRenderer(EntityRendererFactory.Context context) {
+    public IronMusketBallEntityRenderer(EntityRendererFactory.Context context) {
         super(context);
         this.model = new MusketBallEntityModel<>(context.getPart(TotallyBalancedMusketClient.MODEL_MUSKET_BALL_LAYER));
     }
 
     @Override
-    public void render(MusketBallEntity musketBallEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+    public void render(IronMusketBallEntity musketBallEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         matrixStack.push();
 //        matrixStack.translate(0.0f, 0.15f, 0.0f);
 //        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(g, musketBallEntity.prevYaw, musketBallEntity.getYaw()) - 90.0f));
@@ -39,7 +39,7 @@ public class MusketBallEntityRenderer
     }
 
     @Override
-    public Identifier getTexture(MusketBallEntity musketBallEntity) {
+    public Identifier getTexture(IronMusketBallEntity musketBallEntity) {
         return TEXTURE;
     }
 }

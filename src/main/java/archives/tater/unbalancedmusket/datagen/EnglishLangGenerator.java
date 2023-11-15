@@ -1,5 +1,6 @@
 package archives.tater.unbalancedmusket.datagen;
 
+import archives.tater.unbalancedmusket.entity.TotallyBalancedMusketEntities;
 import archives.tater.unbalancedmusket.item.TotallyBalancedMusketItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -20,5 +21,6 @@ public class EnglishLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("item.unbalancedmusket.musket.stage.rammed", "Rammed");
         translationBuilder.add("item.unbalancedmusket.musket.stage.loaded", "Loaded");
         translationBuilder.add("item.unbalancedmusket.musket.projectile", "Projectile:");
+        translationBuilder.add(TotallyBalancedMusketEntities.IRON_MUSKET_BALL, "Iron Musket Ball");
     }
 }

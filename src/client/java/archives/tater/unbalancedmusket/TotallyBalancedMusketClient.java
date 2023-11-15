@@ -1,6 +1,6 @@
 package archives.tater.unbalancedmusket;
 
-import archives.tater.unbalancedmusket.client.render.entity.MusketBallEntityRenderer;
+import archives.tater.unbalancedmusket.client.render.entity.IronMusketBallEntityRenderer;
 import archives.tater.unbalancedmusket.client.render.entity.model.MusketBallEntityModel;
 import archives.tater.unbalancedmusket.entity.TotallyBalancedMusketEntities;
 import archives.tater.unbalancedmusket.item.MusketItem;
@@ -18,7 +18,7 @@ public class TotallyBalancedMusketClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
-		EntityRendererRegistry.register(TotallyBalancedMusketEntities.MusketBallEntityType, MusketBallEntityRenderer::new);
+		EntityRendererRegistry.register(TotallyBalancedMusketEntities.IRON_MUSKET_BALL, IronMusketBallEntityRenderer::new);
 		EntityModelLayerRegistry.registerModelLayer(MODEL_MUSKET_BALL_LAYER, MusketBallEntityModel::getTexturedModelData);
 
 		ModelPredicateProviderRegistry.register(TotallyBalancedMusketItems.MUSKET, new Identifier("charged"), (stack, world, entity, seed) -> MusketItem.getLoadingStage(stack) == MusketItem.Stage.LOADED ? 1.0f : 0.0f);
