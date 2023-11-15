@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    " N ",
+    "NNN",
+    " N "
+  ],
+  "result": {
+    "item": "unbalancedmusket:iron_musket_ball"
+  },
+  "show_notification": true
+}

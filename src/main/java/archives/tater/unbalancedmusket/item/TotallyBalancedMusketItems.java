@@ -13,12 +13,14 @@ public class TotallyBalancedMusketItems {
     public static final Item MUSKET = Registry.register(Registries.ITEM, new Identifier(TotallyBalancedMusket.MOD_ID, "musket"), new MusketItem(new FabricItemSettings().maxCount(1).maxDamage(200)));
     public static final Item BAYONET_MUSKET = Registry.register(Registries.ITEM, new Identifier(TotallyBalancedMusket.MOD_ID, "bayonet_musket"), new BayonetMusketItem(4, -2.8f, 2, new FabricItemSettings().maxCount(1).maxDamage(200)));
     public static final Item RAMROD = Registry.register(Registries.ITEM, new Identifier(TotallyBalancedMusket.MOD_ID, "ramrod"), new Item(new FabricItemSettings().maxCount(1)));
+    public static final Item IRON_MUSKET_BALL = Registry.register(Registries.ITEM, new Identifier(TotallyBalancedMusket.MOD_ID, "iron_musket_ball"), new Item(new FabricItemSettings().maxCount(16)));
 
     public static void register() {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(content -> {
             content.add(MUSKET);
             content.add(BAYONET_MUSKET);
             content.add(RAMROD);
+            content.add(IRON_MUSKET_BALL);
         });
     }
 

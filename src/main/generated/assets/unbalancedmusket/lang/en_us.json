@@ -1,5 +1,10 @@
 {
   "item.unbalancedmusket.bayonet_musket": "Bayonet Musket",
+  "item.unbalancedmusket.iron_musket_ball": "Iron Musket Ball",
   "item.unbalancedmusket.musket": "Musket",
+  "item.unbalancedmusket.musket.projectile": "Projectile:",
+  "item.unbalancedmusket.musket.stage.loaded": "Loaded",
+  "item.unbalancedmusket.musket.stage.powdered": "Powdered",
+  "item.unbalancedmusket.musket.stage.rammed": "Rammed",
   "item.unbalancedmusket.ramrod": "Ramrod"
 }

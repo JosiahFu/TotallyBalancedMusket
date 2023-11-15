@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_musket": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unbalancedmusket:iron_musket_ball"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "unbalancedmusket:iron_musket_ball"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_musket"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "unbalancedmusket:iron_musket_ball"
+    ]
+  },
+  "sends_telemetry_event": false
+}

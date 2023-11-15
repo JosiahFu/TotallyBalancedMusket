@@ -31,6 +31,14 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(TotallyBalancedMusketItems.MUSKET), conditionsFromItem(TotallyBalancedMusketItems.RAMROD))
                 .offerTo(exporter);
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, TotallyBalancedMusketItems.IRON_MUSKET_BALL)
+                .input('N', Items.IRON_NUGGET)
+                .pattern(" N ")
+                .pattern("NNN")
+                .pattern(" N ")
+                .criterion(hasItem(TotallyBalancedMusketItems.MUSKET), conditionsFromItem(TotallyBalancedMusketItems.IRON_MUSKET_BALL))
+                .offerTo(exporter);
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, TotallyBalancedMusketItems.MUSKET)
             .input('I', Items.IRON_INGOT)
             .input('P', ItemTags.PLANKS)

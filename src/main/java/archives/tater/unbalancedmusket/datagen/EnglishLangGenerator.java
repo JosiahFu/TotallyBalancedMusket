@@ -15,5 +15,10 @@ public class EnglishLangGenerator extends FabricLanguageProvider {
         translationBuilder.add(TotallyBalancedMusketItems.MUSKET, "Musket");
         translationBuilder.add(TotallyBalancedMusketItems.BAYONET_MUSKET, "Bayonet Musket");
         translationBuilder.add(TotallyBalancedMusketItems.RAMROD, "Ramrod");
+        translationBuilder.add(TotallyBalancedMusketItems.IRON_MUSKET_BALL, "Iron Musket Ball");
+        translationBuilder.add("item.unbalancedmusket.musket.stage.powdered", "Powdered");
+        translationBuilder.add("item.unbalancedmusket.musket.stage.rammed", "Rammed");
+        translationBuilder.add("item.unbalancedmusket.musket.stage.loaded", "Loaded");
+        translationBuilder.add("item.unbalancedmusket.musket.projectile", "Projectile:");
     }
 }

@@ -21,5 +21,6 @@ public class ModelGenerator extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(TotallyBalancedMusketItems.RAMROD, Models.HANDHELD);
+        itemModelGenerator.register(TotallyBalancedMusketItems.IRON_MUSKET_BALL, Models.GENERATED);
     }
 }

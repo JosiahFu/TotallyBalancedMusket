@@ -1,6 +1,7 @@
 package archives.tater.unbalancedmusket.item;
 
 import archives.tater.unbalancedmusket.entity.MusketBallEntity;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -13,14 +14,18 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 public class MusketItem extends RangedWeaponItem implements Vanishable {
@@ -46,7 +51,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
 
     @Override
     public Predicate<ItemStack> getProjectiles() {
-        return itemStack -> itemStack.isOf(Items.GUNPOWDER) || itemStack.isOf(TotallyBalancedMusketItems.RAMROD) || itemStack.isOf(Items.IRON_NUGGET);
+        return itemStack -> itemStack.isOf(TotallyBalancedMusketItems.IRON_MUSKET_BALL);
     }
 
     @Override
@@ -87,7 +92,6 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
 
     private boolean loadProjectile(LivingEntity shooter, ItemStack musket, ItemStack projectile, boolean creative) {
         if (projectile.isEmpty()) return false;
-        if (!getProjectiles().test(projectile)) return false;
         int loadingStage = getLoadingStage(musket);
         if (!isNextItem(loadingStage, projectile)) return false;
 
@@ -113,13 +117,13 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         return true;
     }
 
-    public static boolean isNextItem(int stage, ItemStack itemStack) {
+    public boolean isNextItem(int stage, ItemStack itemStack) {
         Item item = itemStack.getItem();
 
         return (
                 stage == Stage.UNLOADED && item == Items.GUNPOWDER ||
                 stage == Stage.POWDERED && item == TotallyBalancedMusketItems.RAMROD ||
-                stage == Stage.RAMMED && item == Items.IRON_NUGGET
+                stage == Stage.RAMMED && getProjectiles().test(itemStack)
         );
     }
 
@@ -156,24 +160,26 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
     private static void shoot(World world, LivingEntity shooter, Hand hand, ItemStack musket, ItemStack projectile) {
         if (world.isClient) return;
 
-        ProjectileEntity projectileEntity = new MusketBallEntity(world, shooter);
+        createProjectile(world, shooter, projectile);
+        musket.damage(1, shooter, (e) -> e.sendToolBreakStatus(hand));
+        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 0.5F, 1.8F);
+
+        if (shooter instanceof ServerPlayerEntity serverPlayerEntity) {
+            serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(musket.getItem()));
+        }
+
+        clearProjectile(musket);
+    }
+
+    private static void createProjectile(World world, LivingEntity shooter, ItemStack projectile) {
+        // TODO check for gold musket ball
+        final ProjectileEntity projectileEntity = new MusketBallEntity(world, shooter);
         Vec3d shooterVector = shooter.getRotationVec(1.0F);
         Vector3f velocity = shooterVector.toVector3f();
         Vec3d position = shooter.getEyePos().add(shooterVector.multiply(0.5F));
         projectileEntity.setVelocity(velocity.x(), velocity.y(), velocity.z(), (float) 10.0, (float) 0.2);
         projectileEntity.setPosition(position);
-
-        musket.damage(1, shooter, (e) -> e.sendToolBreakStatus(hand));
         world.spawnEntity(projectileEntity);
-        world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 0.5F, 1.8F);
-
-        if (shooter instanceof ServerPlayerEntity serverPlayerEntity) {
-//            Criteria.SHOT_CROSSBOW.trigger(serverPlayerEntity, musket);
-
-            serverPlayerEntity.incrementStat(Stats.USED.getOrCreateStat(musket.getItem()));
-        }
-
-        clearProjectile(musket);
     }
 
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
@@ -218,23 +224,21 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         return f;
     }
 
-//    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-//        List<ItemStack> list = getProjectiles(stack);
-//        if (isCharged(stack) && !list.isEmpty()) {
-//            ItemStack itemStack = list.get(0);
-//            tooltip.add(Text.translatable("item.minecraft.crossbow.projectile").append(ScreenTexts.SPACE).append(itemStack.toHoverableText()));
-//            if (context.isAdvanced() && itemStack.isOf(Items.FIREWORK_ROCKET)) {
-//                List<Text> list2 = Lists.newArrayList();
-//                Items.FIREWORK_ROCKET.appendTooltip(itemStack, world, list2, context);
-//                if (!list2.isEmpty()) {
-//                    list2.replaceAll(text -> Text.literal("  ").append(text).formatted(Formatting.GRAY));
-//
-//                    tooltip.addAll(list2);
-//                }
-//            }
-//
-//        }
-//    }
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        final int stage = getLoadingStage(stack);
+        switch(stage) {
+            case Stage.POWDERED -> tooltip.add(Text.translatable("item.unbalancedmusket.musket.stage.powdered").formatted(Formatting.GRAY));
+            case Stage.RAMMED -> tooltip.add(Text.translatable("item.unbalancedmusket.musket.stage.rammed").formatted(Formatting.GRAY));
+            case Stage.LOADED -> {
+                if (context.isAdvanced()) {
+                    final ItemStack projectile = getProjectile(stack);
+                    tooltip.add(Text.translatable("item.unbalancedmusket.musket.projectile").append(" ").append(projectile.toHoverableText()));
+                }
+                tooltip.add(Text.translatable("item.unbalancedmusket.musket.stage.loaded").formatted(Formatting.GRAY));
+            }
+        }
+    }
 
     public boolean isUsedOnRelease(ItemStack stack) {
         return stack.isOf(this);
