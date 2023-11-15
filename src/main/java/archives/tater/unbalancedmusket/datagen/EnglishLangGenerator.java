@@ -13,6 +13,7 @@ public class EnglishLangGenerator extends FabricLanguageProvider {
     @Override
     public void generateTranslations(TranslationBuilder translationBuilder) {
         translationBuilder.add(TotallyBalancedMusketItems.MUSKET, "Musket");
+        translationBuilder.add(TotallyBalancedMusketItems.BAYONET_MUSKET, "Bayonet Musket");
         translationBuilder.add(TotallyBalancedMusketItems.RAMROD, "Ramrod");
     }
 }

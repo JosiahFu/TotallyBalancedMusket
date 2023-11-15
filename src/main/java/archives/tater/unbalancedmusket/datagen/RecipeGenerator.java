@@ -8,6 +8,7 @@ import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.tag.ItemTags;
 
 public class RecipeGenerator extends FabricRecipeProvider {
     public RecipeGenerator(FabricDataOutput output) {
@@ -29,5 +30,17 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .pattern("N")
                 .criterion(hasItem(TotallyBalancedMusketItems.MUSKET), conditionsFromItem(TotallyBalancedMusketItems.RAMROD))
                 .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, TotallyBalancedMusketItems.MUSKET)
+            .input('I', Items.IRON_INGOT)
+            .input('P', ItemTags.PLANKS)
+            .input('R', Items.REDSTONE)
+            .input('F', Items.FLINT_AND_STEEL)
+            .input('T', Items.TRIPWIRE_HOOK)
+            .pattern("T I")
+            .pattern("FIP")
+            .pattern("PR ")
+            .criterion(hasItem(Items.REDSTONE), conditionsFromItem(TotallyBalancedMusketItems.MUSKET))
+            .offerTo(exporter);
     }
 }
