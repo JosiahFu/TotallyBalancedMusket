@@ -63,6 +63,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
         if (stage == Stage.LOADED) {
             shoot(world, user, hand, musket, getProjectile(musket));
             setLoadingStage(musket, 0);
+            user.getItemCooldownManager().set(this, 40);
             return TypedActionResult.consume(musket);
         }
 
