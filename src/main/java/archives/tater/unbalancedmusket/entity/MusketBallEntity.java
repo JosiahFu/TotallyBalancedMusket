@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 public class MusketBallEntity
         extends ProjectileEntity {
-    private Random random = this.getWorld().getRandom();
+    private final Random random = this.getWorld().getRandom();
 
     public MusketBallEntity(EntityType<? extends MusketBallEntity> entityType, World world) {
         super(entityType, world);

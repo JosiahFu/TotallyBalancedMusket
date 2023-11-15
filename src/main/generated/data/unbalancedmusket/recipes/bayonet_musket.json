@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "unbalancedmusket:musket"
+    },
+    {
+      "item": "minecraft:iron_sword"
+    }
+  ],
+  "result": {
+    "item": "unbalancedmusket:bayonet_musket"
+  }
+}

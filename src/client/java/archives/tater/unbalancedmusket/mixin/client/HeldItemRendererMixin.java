@@ -1,7 +1,6 @@
 package archives.tater.unbalancedmusket.mixin.client;
 
 import archives.tater.unbalancedmusket.item.MusketItem;
-import archives.tater.unbalancedmusket.item.TotallyBalancedMusketItems;
 import net.minecraft.client.render.item.HeldItemRenderer;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
@@ -17,14 +16,14 @@ public class HeldItemRendererMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z", ordinal = 1)
     )
     private boolean allowMusket(ItemStack stack, Item item) {
-        return stack.isOf(item) || stack.isOf(TotallyBalancedMusketItems.MUSKET);
+        return stack.isOf(item) || stack.getItem() instanceof MusketItem;
     }
 
     @Redirect(
             method = "renderFirstPersonItem",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/item/CrossbowItem;isCharged(Lnet/minecraft/item/ItemStack;)Z")
     )
-    private boolean allowChargedMusket(ItemStack stack) {
+    private boolean checkMusketCharged(ItemStack stack) {
         return CrossbowItem.isCharged(stack) || MusketItem.getLoadingStage(stack) == MusketItem.Stage.LOADED;
     }
 }

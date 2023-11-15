@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_musket": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "unbalancedmusket:ramrod"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "unbalancedmusket:ramrod"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_musket"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "unbalancedmusket:ramrod"
+    ]
+  },
+  "sends_telemetry_event": false
+}

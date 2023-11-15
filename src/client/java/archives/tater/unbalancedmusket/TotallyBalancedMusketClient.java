@@ -22,5 +22,6 @@ public class TotallyBalancedMusketClient implements ClientModInitializer {
 		EntityModelLayerRegistry.registerModelLayer(MODEL_MUSKET_BALL_LAYER, MusketBallEntityModel::getTexturedModelData);
 
 		ModelPredicateProviderRegistry.register(TotallyBalancedMusketItems.MUSKET, new Identifier("charged"), (stack, world, entity, seed) -> MusketItem.getLoadingStage(stack) == MusketItem.Stage.LOADED ? 1.0f : 0.0f);
+		ModelPredicateProviderRegistry.register(TotallyBalancedMusketItems.BAYONET_MUSKET, new Identifier("charged"), (stack, world, entity, seed) -> MusketItem.getLoadingStage(stack) == MusketItem.Stage.LOADED ? 1.0f : 0.0f);
 	}
 }

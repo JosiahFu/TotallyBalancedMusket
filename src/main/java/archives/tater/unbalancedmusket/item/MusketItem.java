@@ -1,6 +1,5 @@
 package archives.tater.unbalancedmusket.item;
 
-import archives.tater.unbalancedmusket.TotallyBalancedMusket;
 import archives.tater.unbalancedmusket.entity.MusketBallEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
