@@ -20,7 +20,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
         ShapelessRecipeJsonBuilder.create(RecipeCategory.COMBAT, TotallyBalancedMusketItems.BAYONET_MUSKET)
                 .input(TotallyBalancedMusketItems.MUSKET)
                 .input(Items.IRON_SWORD)
-                .criterion(hasItem(TotallyBalancedMusketItems.MUSKET), conditionsFromItem(TotallyBalancedMusketItems.BAYONET_MUSKET))
+                .criterion(hasItem(TotallyBalancedMusketItems.MUSKET), conditionsFromItem(TotallyBalancedMusketItems.MUSKET))
                 .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, TotallyBalancedMusketItems.RAMROD)
@@ -28,7 +28,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .pattern("N")
                 .pattern("N")
                 .pattern("N")
-                .criterion(hasItem(TotallyBalancedMusketItems.MUSKET), conditionsFromItem(TotallyBalancedMusketItems.RAMROD))
+                .criterion(hasItem(TotallyBalancedMusketItems.MUSKET), conditionsFromItem(TotallyBalancedMusketItems.MUSKET))
                 .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, TotallyBalancedMusketItems.IRON_MUSKET_BALL)
@@ -36,7 +36,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
                 .pattern(" N ")
                 .pattern("NNN")
                 .pattern(" N ")
-                .criterion(hasItem(TotallyBalancedMusketItems.MUSKET), conditionsFromItem(TotallyBalancedMusketItems.IRON_MUSKET_BALL))
+                .criterion(hasItem(TotallyBalancedMusketItems.MUSKET), conditionsFromItem(TotallyBalancedMusketItems.MUSKET))
                 .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, TotallyBalancedMusketItems.MUSKET)
@@ -48,7 +48,7 @@ public class RecipeGenerator extends FabricRecipeProvider {
             .pattern("T I")
             .pattern("FIP")
             .pattern("PR ")
-            .criterion(hasItem(Items.REDSTONE), conditionsFromItem(TotallyBalancedMusketItems.MUSKET))
+            .criterion(hasItem(Items.REDSTONE), conditionsFromItem(Items.REDSTONE))
             .offerTo(exporter);
     }
 }

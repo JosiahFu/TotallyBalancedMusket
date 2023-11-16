@@ -1,9 +1,9 @@
-// 1.20.2	2023-11-15T12:00:54.733032833	Totally Balanced Musket/Recipes
+// 1.20.2	2023-11-16T12:41:14.528719676	Totally Balanced Musket/Recipes
 a9943405f2d8c808d25bfb5c9a111549c6ff1a6d data/unbalancedmusket/recipes/musket.json
 05f6ddaeb3ca38de4536fdb0eae71d73f84b871d data/unbalancedmusket/recipes/bayonet_musket.json
-1f0eddad3a56ede6abf9344c50efc7f4bad843f4 data/unbalancedmusket/advancements/recipes/combat/bayonet_musket.json
-0665954b241662f335e960c5aa0deedad30649ff data/unbalancedmusket/advancements/recipes/combat/ramrod.json
+e56b3a96065f5947d9a0b42edd91589dd42cc7e5 data/unbalancedmusket/advancements/recipes/combat/bayonet_musket.json
+f4bd85da4ee1f2ebfe1811e181a3cf849d7da490 data/unbalancedmusket/advancements/recipes/combat/ramrod.json
 36eaee400356d754d2b2a84988c58282face4ddd data/unbalancedmusket/recipes/ramrod.json
 e8c384e1b29c018baa433daa8b6f2f6b2fea4d46 data/unbalancedmusket/recipes/iron_musket_ball.json
-81a49eb4769da2ec9065666daf8652eaec570dc4 data/unbalancedmusket/advancements/recipes/combat/iron_musket_ball.json
-666c3daa73ae6a3a5bff088dbe5252880cb1ebb7 data/unbalancedmusket/advancements/recipes/combat/musket.json
+06a7b70352fb208587b37409c7a3e9ebe62a4cae data/unbalancedmusket/advancements/recipes/combat/iron_musket_ball.json
+29e4e38f5f4b2504f9d968e88f4806cc21e1dc8b data/unbalancedmusket/advancements/recipes/combat/musket.json
