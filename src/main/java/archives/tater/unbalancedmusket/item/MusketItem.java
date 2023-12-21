@@ -204,7 +204,7 @@ public class MusketItem extends RangedWeaponItem implements Vanishable {
     }
 
     public int getMaxUseTime(ItemStack stack) {
-        return getPullTime(stack) + 3;
+        return getLoadingStage(stack) == Stage.RAMMED ? 0 : getPullTime(stack) + 3;
     }
 
     public static int getPullTime(ItemStack stack) {
