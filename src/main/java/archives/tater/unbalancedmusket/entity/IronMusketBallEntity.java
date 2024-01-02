@@ -1,5 +1,7 @@
 package archives.tater.unbalancedmusket.entity;
 
+import archives.tater.unbalancedmusket.TotallyBalancedMusket;
+import archives.tater.unbalancedmusket.TotallyBalancedMusketDamageTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -59,9 +61,9 @@ public class IronMusketBallEntity
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         Entity entity = this.getOwner();
-        if (entity instanceof LivingEntity livingEntity) {
-            entityHitResult.getEntity().damage(this.getDamageSources().mobProjectile(this, livingEntity), 40.0f);
-        }
+        var damageSource = TotallyBalancedMusketDamageTypes.of(getWorld(), TotallyBalancedMusketDamageTypes.MUSKET_DAMAGE_TYPE, entity);
+        TotallyBalancedMusket.LOGGER.info("Damage source: {}", damageSource.getAttacker());
+        entityHitResult.getEntity().damage(damageSource, 40.0f);
     }
 
     @Override

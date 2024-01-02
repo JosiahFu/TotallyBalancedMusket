@@ -22,5 +22,9 @@ public class EnglishLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("item.unbalancedmusket.musket.stage.loaded", "Loaded");
         translationBuilder.add("item.unbalancedmusket.musket.projectile", "Projectile:");
         translationBuilder.add(TotallyBalancedMusketEntities.IRON_MUSKET_BALL, "Iron Musket Ball");
+
+        translationBuilder.add("death.attack.musket", "%s was blown away");
+        translationBuilder.add("death.attack.musket.player", "%s was blown away by %s");
+        translationBuilder.add("death.attack.musket.item", "%s was blown away by %s using %s");
     }
 }
