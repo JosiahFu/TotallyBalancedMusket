@@ -8,10 +8,10 @@
 		"ThePotatoArchivist"
 	],
 	"contact": {
-		"homepage": "https://github.com/JosiahFu/TotallyBalancedMusket/",
+		"homepage": "https://modrinth.com/mod/totally-balanced-musket",
 		"sources": "https://github.com/JosiahFu/TotallyBalancedMusket/"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/unbalancedmusket/icon.png",
 	"environment": "*",
 	"entrypoints": {
