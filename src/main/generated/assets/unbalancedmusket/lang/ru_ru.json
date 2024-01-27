@@ -1,6 +1,6 @@
 {
-  "death.attack.musket": "%s was blown away by %s",
-  "death.attack.musket.item": "%s was blown away by %s using %s",
+  "death.attack.musket": "%s был застрелен %s",
+  "death.attack.musket.item": "%s был застрелен %s с помощью %s",
   "entity.unbalancedmusket.iron_musket_ball": "Железная мушкетная пуля",
   "item.unbalancedmusket.bayonet_musket": "Штык-мушкет",
   "item.unbalancedmusket.iron_musket_ball": "Железная мушкетная пуля",
