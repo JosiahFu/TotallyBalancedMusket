@@ -23,7 +23,7 @@ public class RussianLangGenerator extends FabricLanguageProvider {
         translationBuilder.add("item.unbalancedmusket.musket.projectile", "Снаряд:");
         translationBuilder.add(TotallyBalancedMusketEntities.IRON_MUSKET_BALL, "Железная мушкетная пуля");
 
-        translationBuilder.add("death.attack.musket", "%s was blown away by %s");
-        translationBuilder.add("death.attack.musket.item", "%s was blown away by %s using %s");
+        translationBuilder.add("death.attack.musket", "%s был застрелен %s");
+        translationBuilder.add("death.attack.musket.item", "%s был застрелен %s с помощью %s");
     }
 }
