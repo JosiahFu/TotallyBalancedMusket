@@ -9,6 +9,7 @@ public class TotallyBalancedMusketDataGenerator implements DataGeneratorEntrypoi
 		final FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 		pack.addProvider(ModelGenerator::new);
 		pack.addProvider(EnglishLangGenerator::new);
+		pack.addProvider(RussianLangGenerator::new);
 		pack.addProvider(RecipeGenerator::new);
 	}
 }
